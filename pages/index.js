@@ -25,7 +25,7 @@ export default function Home() {
           src="/under-construction.svg"
           alt="Road sign to indicate construction work"
         />
-        <h1>Thiss site is currently under construction!</h1>
+        <h1>This site is currently under construction!</h1>
         <h2>What is being constructed?</h2>
         <p className={styles.moreInfo}>
           Using this site, you will be able to lend items to your neighbours as
