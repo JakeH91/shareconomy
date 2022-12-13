@@ -1,0 +1,29 @@
+.emptyCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: 1px solid #e9e9e9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  transform: rotate(0deg);
+}
+
+.emptyCircle.active {
+  transform: rotate(180deg);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: 1px solid #e9e9e9;
+  cursor: pointer;
+}
+
+.emptyCircle:hover,
+.avatar:hover {
+  border: 1px solid #9e9e9e;
+}

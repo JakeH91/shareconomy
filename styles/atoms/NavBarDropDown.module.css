@@ -1,0 +1,20 @@
+.dropdownContainer {
+  border: 1px solid #e9e9e9;
+  border-top: none;
+  padding: 12px 0;
+  margin-right: 18px;
+  align-self: flex-end;
+  z-index: 1;
+  margin-top: -46px;
+  transition: margin 0.2s ease-in-out;
+}
+
+.dropdownContainer.expanded {
+  margin-top: 0;
+}
+
+.dropdownItem {
+  width: 120px;
+  text-align: left;
+  padding: 6px 12px;
+}

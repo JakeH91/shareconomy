@@ -1,5 +1,6 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "@/styles/pages/Home.module.css";
+import NavBar from "@/components/molecules/NavBar";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
           href="/favicon-16x16.png"
         />
       </Head>
-
+      <NavBar />
       <main className={styles.main}>
         <img
           src="/under-construction.svg"
