@@ -15,22 +15,19 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.moreInfo {
   max-width: 600px;
-  line-height: 150%;
-  text-align: center;
-  margin: 0;
-  margin-bottom: 24px;
 }
 
-.moreInfo a {
+.main ul {
+  text-align: left;
+}
+
+.main a {
   color: #0070f3;
 }
 
-.moreInfo a:hover,
-.moreInfo a:focus,
-.moreInfo a:active {
+.main a:hover,
+.main a:focus,
+.main a:active {
   text-decoration: underline;
 }
