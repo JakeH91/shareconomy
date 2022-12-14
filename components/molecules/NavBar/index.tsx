@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from "react";
  * Component that alerts if you click outside of it
  */
 
-export default function NavBar(): React.ReactNode {
+export default function NavBar(): React.ReactElement {
   const user = useUser();
   const [expanded, setExpanded] = useState(false);
 
