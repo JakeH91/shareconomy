@@ -1,0 +1,33 @@
+.container {
+  min-height: 100vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  padding: 5rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+}
+
+.main ul {
+  text-align: left;
+}
+
+.main a {
+  color: #0070f3;
+}
+
+.main a:hover,
+.main a:focus,
+.main a:active {
+  text-decoration: underline;
+}

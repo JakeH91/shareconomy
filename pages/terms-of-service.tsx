@@ -1,7 +1,7 @@
 import NavBar from "@/components/molecules/NavBar";
-import styles from "@/styles/pages/Privacy.module.css";
+import styles from "@/styles/pages/Terms.module.css";
 
-export default function Privacy() {
+export default function Terms() {
   return (
     <div className={styles.container}>
       <NavBar />
