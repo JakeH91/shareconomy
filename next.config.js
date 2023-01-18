@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  distDir: "build",
   output: "standalone",
   webpack: (config) => {
     config.watchOptions = {

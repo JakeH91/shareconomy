@@ -6,7 +6,7 @@ This examples shows how to use Docker with Next.js based on the [deployment docu
 
 1. [Install Docker](https://docs.docker.com/get-docker/) on your machine.
 1. Build your container: `docker build -t shareconomy .`.
-1. Run your container: `docker run -p 3001:3001 shareconomy`.
+1. Run your container: `docker run -p 8080:8080 shareconomy`.
 
 You can view your images created with `docker images`.
 
@@ -50,10 +50,10 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+Open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3001/api/hello](http://localhost:3001/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:8080/api/hello](http://localhost:8080/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
