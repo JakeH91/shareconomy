@@ -1,4 +1,3 @@
-import { useUser } from "@auth0/nextjs-auth0/client";
 import styles from "@/styles/molecules/NavBar.module.css";
 import Avatar from "@/components/atoms/Avatar";
 import NavBarDropDown from "@/components/atoms/NavBarDropDown";
@@ -13,7 +12,7 @@ import { useEffect, useRef, useState } from "react";
  */
 
 export default function NavBar(): React.ReactElement {
-  const user = useUser();
+  // const user = useUser();
   const [expanded, setExpanded] = useState(false);
 
   function useOutsideAlerter(ref) {
@@ -43,10 +42,10 @@ export default function NavBar(): React.ReactElement {
         <Avatar
           handleClick={() => setExpanded((current) => !current)}
           isActive={expanded}
-          src={user?.user?.picture}
+          // src={user?.user?.picture}
         />
       </nav>
-      <NavBarDropDown user={user} expanded={expanded} />
+      {/* <NavBarDropDown user={user} expanded={expanded} /> */}
     </div>
   );
 }

@@ -1,13 +1,12 @@
-import { UserContext } from "@auth0/nextjs-auth0/client";
 import styles from "@/styles/atoms/NavBarDropDown.module.css";
 
 type NavBarDropDownProps = {
-  user: UserContext;
+  // user: UserContext;
   expanded: boolean;
 };
 
 export default function NavBarDropDown({
-  user,
+  // user,
   expanded,
 }: NavBarDropDownProps): React.ReactElement {
   return (
@@ -16,7 +15,8 @@ export default function NavBarDropDown({
         expanded ? styles.expanded : ""
       }`}
     >
-      {user.user ? (
+      <p>Hi</p>
+      {/* {user.user ? (
         <a className={styles.dropdownItem} href="/api/auth/logout">
           Logout
         </a>
@@ -24,7 +24,7 @@ export default function NavBarDropDown({
         <a className={styles.dropdownItem} href="/api/auth/login">
           Login
         </a>
-      )}
+      )} */}
     </div>
   );
 }

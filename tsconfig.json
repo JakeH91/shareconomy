@@ -9,31 +9,18 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ]
+      "@/components/*": ["components/*"],
+      "@/styles/*": ["styles/*"],
+      "@/types/*": ["types/*"]
     },
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "incremental": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
