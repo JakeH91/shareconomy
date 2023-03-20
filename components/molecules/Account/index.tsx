@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   useUser,
   useSupabaseClient,
   Session,
 } from "@supabase/auth-helpers-react";
 import { Database } from "@/types/supabase";
+import useGetProfile from "utils/hooks/useGetProfile";
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 
 export default function Account({ session }: { session: Session }) {
@@ -15,38 +16,24 @@ export default function Account({ session }: { session: Session }) {
   const [last_name, setLastName] = useState<Profiles["last_name"]>(null);
   const [avatar_url, setAvatarUrl] = useState<Profiles["avatar_url"]>(null);
 
-  useEffect(() => {
-    getProfile();
-  }, [session]);
+  console.log("session:", session);
 
-  async function getProfile() {
-    try {
-      setLoading(true);
-      if (!user) throw new Error("No user");
-
-      const response = await fetch("api/profiles/get", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      const data = await response.json();
-
-      if (data.message && response.status !== 406) {
-        throw data.message;
-      }
-
-      if (data) {
-        setFirstName(data.first_name);
-        setLastName(data.last_name);
-        setAvatarUrl(data.avatar_url);
-      }
-    } catch (error) {
-      alert(`Error: ${error}`);
-      console.log("error:", error);
-    } finally {
-      setLoading(false);
-    }
+  const [data, isLoading, error] = useGetProfile(session);
+  if (
+    data &&
+    (data.first_name !== first_name ||
+      data.last_name !== last_name ||
+      data.avatar_url !== avatar_url)
+  ) {
+    setFirstName(data.first_name);
+    setLastName(data.last_name);
+    setAvatarUrl(data.avatar_url);
   }
+  if (isLoading !== loading) {
+    setLoading(isLoading);
+  }
+
+  console.log([data, isLoading, error]);
 
   async function updateProfile({
     first_name,

@@ -26,9 +26,7 @@ export default function Auth({}: AuthProps): React.ReactElement {
     };
     return (
       <>
-        <h2>
-          Create an account to subscribe to the monthly development newsletter
-        </h2>
+        <h2>Forgot your password? We'll send you an email</h2>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor={"email"}>Email:</label>
           <input
@@ -37,7 +35,11 @@ export default function Auth({}: AuthProps): React.ReactElement {
             {...register("email")}
             autoComplete={"email"}
           />
-          <input className={styles.button} type={"submit"} value={"Sign In"} />
+          <input
+            className={styles.button}
+            type={"submit"}
+            value={"Send Email"}
+          />
         </form>
         <p onClick={() => setAuthState("sign-in")}>{"< Back to sign in"}</p>
       </>
@@ -60,9 +62,7 @@ export default function Auth({}: AuthProps): React.ReactElement {
 
     return (
       <>
-        <h2>
-          Create an account to subscribe to the monthly development newsletter
-        </h2>
+        <h2>Sign in to get started</h2>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor={"email"}>Email:</label>
           <input
@@ -120,9 +120,7 @@ export default function Auth({}: AuthProps): React.ReactElement {
 
     return (
       <>
-        <h2>
-          Create an account to subscribe to the monthly development newsletter
-        </h2>
+        <h2>Create an account to get started</h2>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor={"first_name"}>First Name:</label>
           <input
