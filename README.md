@@ -57,3 +57,19 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:8080/api/hello](http://localhost:8080/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+# Supabase
+
+## Generating Types
+
+Whenever updates are made to any tables in supabase, it is important to regenerate the supabase types (found in `types/supabase.ts`). With a Personal Access Token, you must login to supabase in your terminal with:
+
+```bash
+npx supabase login
+```
+
+Once successfully logged in, you can run the following command from the root directory (replacing "$PROJECT_ID"):
+
+```bash
+npx supabase gen types typescript --project-id "$PROJECT_ID" --schema public > types/supabase.ts
+```

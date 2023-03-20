@@ -1,6 +1,7 @@
 import styles from "@/styles/molecules/NavBar.module.css";
 import Avatar from "@/components/atoms/Avatar";
 import NavBarDropDown from "@/components/atoms/NavBarDropDown";
+import { useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -12,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
  */
 
 export default function NavBar(): React.ReactElement {
-  // const user = useUser();
+  const user = useUser();
   const [expanded, setExpanded] = useState(false);
 
   function useOutsideAlerter(ref) {
@@ -45,7 +46,7 @@ export default function NavBar(): React.ReactElement {
           // src={user?.user?.picture}
         />
       </nav>
-      {/* <NavBarDropDown user={user} expanded={expanded} /> */}
+      <NavBarDropDown user={user} expanded={expanded} />
     </div>
   );
 }
