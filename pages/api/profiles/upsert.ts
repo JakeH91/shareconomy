@@ -2,7 +2,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/types/supabase";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function signInWithPassword(
+export default async function upsertProfile(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

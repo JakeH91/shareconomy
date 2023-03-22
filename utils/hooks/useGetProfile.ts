@@ -16,8 +16,6 @@ export default function useGetProfile(
     const getProfile = async () => {
       try {
         setIsLoading(true);
-        if (!user) throw new Error("No user");
-
         const response = await fetch("api/profiles/get", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -26,7 +24,7 @@ export default function useGetProfile(
         const data = await response.json();
 
         if (data.message && response.status !== 406) {
-          throw data.message;
+          throw "No user";
         }
 
         if (data) {

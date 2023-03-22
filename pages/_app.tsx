@@ -5,6 +5,7 @@ import { AppProps } from "next/app";
 import "@/styles/pages/globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import NavBar from "@/components/molecules/NavBar";
 config.autoAddCss = false;
 
 function App({
@@ -20,7 +21,10 @@ function App({
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <Component {...pageProps} />
+      <>
+        <NavBar />
+        <Component {...pageProps} />
+      </>
     </SessionContextProvider>
   );
 }

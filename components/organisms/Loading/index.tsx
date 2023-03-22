@@ -1,16 +1,11 @@
 import Head from "next/head";
 import styles from "@/styles/pages/Home.module.css";
-import { useSession } from "@supabase/auth-helpers-react";
-import HomePageSignedOut from "@/components/organisms/HomePage/SignedOut";
-import HomePageSignedIn from "@/components/organisms/HomePage/SignedIn";
 
-export default function Home() {
-  const session = useSession();
-
+export default function Loading() {
   return (
     <div className={`page ${styles.container}`}>
       <Head>
-        <title>Shareconomy</title>
+        <title>Loading...</title>
         <link
           rel="icon"
           type="image/png"
@@ -24,7 +19,9 @@ export default function Home() {
           href="/favicon-16x16.png"
         />
       </Head>
-      {!session ? <HomePageSignedOut /> : <HomePageSignedIn />}
+      <main>
+        <h1>LOADING</h1>
+      </main>
     </div>
   );
 }

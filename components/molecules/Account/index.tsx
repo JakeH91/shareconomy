@@ -1,39 +1,22 @@
-import { useEffect, useState } from "react";
-import {
-  useUser,
-  useSupabaseClient,
-  Session,
-} from "@supabase/auth-helpers-react";
+import { useState } from "react";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Database } from "@/types/supabase";
-import useGetProfile from "utils/hooks/useGetProfile";
+import Loading from "@/components/organisms/Loading";
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 
-export default function Account({ session }: { session: Session }) {
+export default function Account({ profileData }: { profileData: Profiles }) {
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
-  const [loading, setLoading] = useState(true);
-  const [first_name, setFirstName] = useState<Profiles["first_name"]>(null);
-  const [last_name, setLastName] = useState<Profiles["last_name"]>(null);
-  const [avatar_url, setAvatarUrl] = useState<Profiles["avatar_url"]>(null);
-
-  console.log("session:", session);
-
-  const [data, isLoading, error] = useGetProfile(session);
-  if (
-    data &&
-    (data.first_name !== first_name ||
-      data.last_name !== last_name ||
-      data.avatar_url !== avatar_url)
-  ) {
-    setFirstName(data.first_name);
-    setLastName(data.last_name);
-    setAvatarUrl(data.avatar_url);
-  }
-  if (isLoading !== loading) {
-    setLoading(isLoading);
-  }
-
-  console.log([data, isLoading, error]);
+  const [loading, setLoading] = useState(false);
+  const [first_name, setFirstName] = useState<Profiles["first_name"]>(
+    profileData.first_name
+  );
+  const [last_name, setLastName] = useState<Profiles["last_name"]>(
+    profileData.last_name
+  );
+  const [avatar_url, setAvatarUrl] = useState<Profiles["avatar_url"]>(
+    profileData.avatar_url
+  );
 
   async function updateProfile({
     first_name,
@@ -71,12 +54,12 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return loading ? (
-    <h1>Loading</h1>
+    <Loading />
   ) : (
     <div className="form-widget">
       <div>
         <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
+        <input id="email" type="text" value={profileData.email} disabled />
       </div>
       <div>
         <label htmlFor="first_name">First Name</label>

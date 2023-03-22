@@ -4,11 +4,11 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #583a92;
+  border: 1px solid #583a92;
   border-radius: 8px;
   width: 100%;
   height: -webkit-fill-available;
-  color: white;
+  color: #583a92;
 }
 
 .form {

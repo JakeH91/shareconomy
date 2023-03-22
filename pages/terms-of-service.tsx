@@ -3,7 +3,7 @@ import styles from "@/styles/pages/Terms.module.css";
 
 export default function Terms() {
   return (
-    <div className={styles.container}>
+    <div className={`page ${styles.container}`}>
       <NavBar />
       <main className={styles.main}>
         <h1>Website Terms and Conditions of Use</h1>
