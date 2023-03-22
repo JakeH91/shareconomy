@@ -1,19 +1,23 @@
 import styles from "@/styles/organisms/Auth.module.css";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 
-type AuthProps = {};
+type AuthProps = {
+  form?: "sign-up" | "sign-in" | "forgot-password";
+};
 
-export default function Auth({}: AuthProps): React.ReactElement {
+export default function Auth({ form }: AuthProps): React.ReactElement {
   const supabase = useSupabaseClient();
   const [authState, setAuthState] = useState<
     "sign-up" | "sign-in" | "forgot-password"
-  >("sign-up");
+  >(form || "sign-up");
 
   type ForgotPasswordFormValues = {
     email: string;
   };
+
+  console.log("Initial State:", form);
 
   function ForgotPassword() {
     const { register, handleSubmit } = useForm<ForgotPasswordFormValues>();

@@ -4,7 +4,6 @@ import styles from "@/styles/pages/Privacy.module.css";
 export default function Privacy() {
   return (
     <div className={`page ${styles.container}`}>
-      <NavBar />
       <main className={styles.main}>
         <h1>Privacy Policy for Shareconomy</h1>
 

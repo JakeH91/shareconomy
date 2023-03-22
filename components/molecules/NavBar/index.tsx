@@ -1,8 +1,10 @@
 import styles from "@/styles/molecules/NavBar.module.css";
 import Avatar from "@/components/atoms/Avatar";
 import NavBarDropDown from "@/components/atoms/NavBarDropDown";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useSession, useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useRef, useState } from "react";
+import useGetProfile from "@/utils/hooks/useGetProfile";
+import Link from "next/link";
 
 /**
  * Hook that alerts clicks outside of the passed ref
@@ -14,6 +16,8 @@ import { useEffect, useRef, useState } from "react";
 
 export default function NavBar(): React.ReactElement {
   const user = useUser();
+  const session = useSession();
+  const [profile, isLoading, error] = useGetProfile(session);
   const [expanded, setExpanded] = useState(false);
 
   function useOutsideAlerter(ref) {
@@ -40,13 +44,35 @@ export default function NavBar(): React.ReactElement {
   return (
     <div ref={wrapperRef} className={styles.navbarWrapper}>
       <nav className={styles.navbar}>
-        <Avatar
-          handleClick={() => setExpanded((current) => !current)}
-          isActive={expanded}
-          // src={user?.user?.picture}
-        />
+        <Link className={styles.navbarButton} href={"/"}>
+          Home
+        </Link>
+        {user ? (
+          <div>
+            <Avatar
+              handleClick={() => setExpanded((current) => !current)}
+              isActive={expanded}
+              src={profile?.avatar_url}
+            />
+          </div>
+        ) : (
+          <div className={styles.navbarButtonCollection}>
+            <Link
+              className={styles.navbarButton}
+              href={{
+                pathname: "/auth",
+                query: { form: "sign-in" },
+              }}
+            >
+              Sign In
+            </Link>
+            <Link className={styles.navbarButton} href={"/auth"}>
+              Create Account
+            </Link>
+          </div>
+        )}
       </nav>
-      <NavBarDropDown user={user} expanded={expanded} />
+      {user && <NavBarDropDown expanded={expanded} />}
     </div>
   );
 }

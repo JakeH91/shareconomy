@@ -12,6 +12,7 @@
       "@/components/*": ["components/*"],
       "@/api/*": ["pages/api/*"],
       "@/styles/*": ["styles/*"],
+      "@/utils/*": ["utils/*"],
       "@/types/*": ["types/*"]
     },
     "jsx": "preserve",

@@ -9,6 +9,7 @@
   width: 100%;
   height: -webkit-fill-available;
   color: #583a92;
+  max-width: 600px;
 }
 
 .form {
