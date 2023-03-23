@@ -57,16 +57,10 @@ export default function NavBar(): React.ReactElement {
           </div>
         ) : (
           <div className={styles.navbarButtonCollection}>
-            <Link
-              className={styles.navbarButton}
-              href={{
-                pathname: "/auth",
-                query: { form: "sign-in" },
-              }}
-            >
+            <Link className={styles.navbarButton} href={"/auth/sign-in"}>
               Sign In
             </Link>
-            <Link className={styles.navbarButton} href={"/auth"}>
+            <Link className={styles.navbarButton} href={"/auth/sign-up"}>
               Create Account
             </Link>
           </div>
