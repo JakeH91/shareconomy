@@ -1,7 +1,6 @@
 import styles from "@/styles/atoms/Avatar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 
 type AvatarProps = {
   src?: string;

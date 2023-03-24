@@ -1,7 +1,9 @@
 import styles from "@/styles/organisms/Auth.module.css";
 import Link from "next/link";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
+import FormSubmit from "@/components/atoms/FormAtoms/FormSubmit";
+import InputWithLabel from "@/components/atoms/FormAtoms/InputWithLabel";
 
 type ForgotPasswordProps = {
   href?: string;
@@ -17,7 +19,6 @@ export default function ForgotPassword({
   clickHandler,
 }: ForgotPasswordProps): React.ReactElement {
   const supabase = useSupabaseClient();
-  const { register, handleSubmit } = useForm<ForgotPasswordFormValues>();
   const onSubmit: SubmitHandler<ForgotPasswordFormValues> = async (data) => {
     try {
       await supabase.auth.resetPasswordForEmail(data.email);
@@ -28,16 +29,14 @@ export default function ForgotPassword({
   return (
     <>
       <h2>Forgot your password? We'll send you an email</h2>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor={"email"}>Email:</label>
-        <input
-          type={"email"}
+      <FormSubmit onSubmit={onSubmit} styles={styles} buttonText={"Send Email"}>
+        <InputWithLabel
           id={"email"}
-          {...register("email")}
+          label={"Email:"}
+          type={"email"}
           autoComplete={"email"}
         />
-        <input className={styles.button} type={"submit"} value={"Send Email"} />
-      </form>
+      </FormSubmit>
       {href ? (
         <Link href={href}>{"< Back to sign in"}</Link>
       ) : (

@@ -2,6 +2,11 @@ import { useState } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Database } from "@/types/supabase";
 import Loading from "@/components/organisms/Loading";
+import FormSubmit from "@/components/atoms/FormAtoms/FormSubmit";
+import { SubmitHandler } from "react-hook-form";
+import styles from "@/styles/organisms/Auth.module.css";
+import InputWithLabel from "@/components/atoms/FormAtoms/InputWithLabel";
+
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 
 export default function Account({ profileData }: { profileData: Profiles }) {
@@ -18,23 +23,16 @@ export default function Account({ profileData }: { profileData: Profiles }) {
     profileData.avatar_url
   );
 
-  async function updateProfile({
-    first_name,
-    last_name,
-  }: {
-    first_name: Profiles["first_name"];
-    last_name: Profiles["last_name"];
-    avatar_url: Profiles["avatar_url"];
-  }) {
+  const onSubmit: SubmitHandler<Profiles> = async (data) => {
     try {
       setLoading(true);
       if (!user) throw new Error("No user");
 
       const updates = {
         id: user.id,
-        first_name,
-        last_name,
-        avatar_url,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        avatar_url: data.avatar_url,
         updated_at: new Date().toISOString(),
       };
 
@@ -51,53 +49,49 @@ export default function Account({ profileData }: { profileData: Profiles }) {
     } finally {
       setLoading(false);
     }
-  }
+  };
+
+  // TODO: Refresh after update, to repopulate the form fields
 
   return loading ? (
     <Loading />
   ) : (
-    <div className="form-widget">
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={profileData.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="first_name">First Name</label>
-        <input
-          id="first_name"
-          type="text"
-          value={first_name || ""}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="last_name">Last Name</label>
-        <input
-          id="last_name"
-          type="text"
-          value={last_name || ""}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="avatar_url">Avatar URL</label>
-        <input
-          id="avatar_url"
-          type="text"
-          value={avatar_url || ""}
-          onChange={(e) => setAvatarUrl(e.target.value)}
-        />
-      </div>
-
-      <div>
-        <button
-          className="button primary block"
-          onClick={() => updateProfile({ first_name, last_name, avatar_url })}
-          disabled={loading}
-        >
-          {loading ? "Loading ..." : "Update"}
-        </button>
-      </div>
+    <div>
+      <FormSubmit
+        styles={styles}
+        onSubmit={onSubmit}
+        buttonText={loading ? "Loading ..." : "Update"}
+      >
+        <>
+          <InputWithLabel
+            id={"email"}
+            label={"Email:"}
+            type={"text"}
+            value={profileData.email}
+            disabled
+          />
+          <InputWithLabel
+            id={"first_name"}
+            label={"First Name:"}
+            type={"text"}
+            value={first_name || ""}
+            autoComplete={"given-name"}
+          />
+          <InputWithLabel
+            id={"last_name"}
+            label={"Last Name:"}
+            type={"text"}
+            value={last_name || ""}
+            autoComplete={"family-name"}
+          />
+          <InputWithLabel
+            id={"avatar_url"}
+            label={"Avatar URL::"}
+            type={"text"}
+            value={avatar_url || ""}
+          />
+        </>
+      </FormSubmit>
       <div>
         <button
           className="button block"

@@ -1,7 +1,9 @@
 import styles from "@/styles/organisms/Auth.module.css";
 import Link from "next/link";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
+import FormSubmit from "@/components/atoms/FormAtoms/FormSubmit";
+import InputWithLabel from "@/components/atoms/FormAtoms/InputWithLabel";
 
 type SignUpProps = {
   href?: string;
@@ -20,7 +22,6 @@ export default function SignUp({
   clickHandler,
 }: SignUpProps): React.ReactElement {
   const supabase = useSupabaseClient();
-  const { register, handleSubmit } = useForm<SignUpFormValues>();
   const onSubmit: SubmitHandler<SignUpFormValues> = async (data) => {
     try {
       await supabase.auth.signUp({
@@ -41,38 +42,34 @@ export default function SignUp({
   return (
     <>
       <h2>Create an account to get started</h2>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor={"first_name"}>First Name:</label>
-        <input
-          type={"text"}
-          id={"first_name"}
-          {...register("first_name")}
-          autoComplete={"given-name"}
-        />
-        <label htmlFor={"last_name"}>Last Name:</label>
-        <input
-          type={"text"}
-          id={"last_name"}
-          {...register("last_name")}
-          autoComplete={"family-name"}
-        />
-        <label htmlFor={"email"}>Email:</label>
-        <input
-          type={"email"}
-          id={"email"}
-          {...register("email")}
-          autoComplete={"email"}
-        />
-        <label htmlFor={"password"}>Password:</label>
-        <input
-          type={"password"}
-          id={"password"}
-          {...register("password")}
-          autoComplete={"new-password"}
-        />
-        <input className={styles.button} type={"submit"} value={"Sign Up"} />
-      </form>
-
+      <FormSubmit onSubmit={onSubmit} styles={styles} buttonText={"Sign Up"}>
+        <>
+          <InputWithLabel
+            id={"first_name"}
+            label={"First Name:"}
+            type={"text"}
+            autoComplete={"given-name"}
+          />
+          <InputWithLabel
+            id={"last_name"}
+            label={"Last Name:"}
+            type={"text"}
+            autoComplete={"family-name"}
+          />
+          <InputWithLabel
+            id={"email"}
+            label={"Email:"}
+            type={"email"}
+            autoComplete={"email"}
+          />
+          <InputWithLabel
+            id={"password"}
+            label={"Password:"}
+            type={"password"}
+            autoComplete={"new-password"}
+          />
+        </>
+      </FormSubmit>
       {href ? (
         <Link href={href}>{"Already have an account? Sign in"}</Link>
       ) : (

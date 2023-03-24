@@ -1,7 +1,9 @@
 import styles from "@/styles/organisms/Auth.module.css";
 import Link from "next/link";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
+import FormSubmit from "@/components/atoms/FormAtoms/FormSubmit";
+import InputWithLabel from "@/components/atoms/FormAtoms/InputWithLabel";
 
 type SignInProps = {
   hrefs?: {
@@ -24,7 +26,6 @@ export default function SignIn({
   clickHandlers,
 }: SignInProps): React.ReactElement {
   const supabase = useSupabaseClient();
-  const { register, handleSubmit } = useForm<SignInFormValues>();
   const onSubmit: SubmitHandler<SignInFormValues> = async (data) => {
     await supabase.auth.signInWithPassword({
       email: data.email,
@@ -35,23 +36,22 @@ export default function SignIn({
   return (
     <>
       <h2>Sign in to get started</h2>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor={"email"}>Email:</label>
-        <input
-          type={"email"}
-          id={"email"}
-          {...register("email")}
-          autoComplete={"email"}
-        />
-        <label htmlFor={"password"}>Password:</label>
-        <input
-          type={"password"}
-          id={"password"}
-          {...register("password")}
-          autoComplete={"new-password"}
-        />
-        <input className={styles.button} type={"submit"} value={"Sign In"} />
-      </form>
+      <FormSubmit onSubmit={onSubmit} styles={styles} buttonText={"Sign In"}>
+        <>
+          <InputWithLabel
+            id={"email"}
+            label={"Email:"}
+            type={"email"}
+            autoComplete={"email"}
+          />
+          <InputWithLabel
+            id={"password"}
+            label={"Password:"}
+            type={"password"}
+            autoComplete={"new-password"}
+          />
+        </>
+      </FormSubmit>
       {hrefs ? (
         <>
           <Link href={hrefs.forgotPassword}>{"Forgot your password?"}</Link>
