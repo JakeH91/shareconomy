@@ -52,7 +52,6 @@ export default function Account({ profileData }: { profileData: Profiles }) {
   };
 
   // TODO: Refresh after update, to repopulate the form fields
-
   return loading ? (
     <Loading />
   ) : (

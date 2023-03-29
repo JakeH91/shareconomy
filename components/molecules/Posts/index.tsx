@@ -1,11 +1,12 @@
 import { Database } from "@/types/supabase";
 import Post from "@/components/molecules/Post";
 
-// import styles from "@/styles/molecules/Post.module.css";
-type Post = Database["public"]["Tables"]["posts"]["Row"];
-
+// import styles from "@/styles/molecules/Posts.module.css";
+type PostType = Database["public"]["Tables"]["posts"]["Row"];
+type Comment = Database["public"]["Tables"]["comments"]["Row"];
+type PostWithComments = PostType & { comments: Comment[] };
 type PostsProps = {
-  posts: Post[];
+  posts: PostWithComments[];
 };
 
 export default function Posts({ posts }: PostsProps): React.ReactElement {
@@ -18,7 +19,7 @@ export default function Posts({ posts }: PostsProps): React.ReactElement {
             new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf()
         )
         .map((post) => {
-          return <Post post={post} />;
+          return <Post key={post.id} post={post} />;
         })}
     </>
   );

@@ -22,6 +22,8 @@ export default function SignUp({
   clickHandler,
 }: SignUpProps): React.ReactElement {
   const supabase = useSupabaseClient();
+
+  // TODO: change state to "Verication email sent" or some such thing
   const onSubmit: SubmitHandler<SignUpFormValues> = async (data) => {
     try {
       await supabase.auth.signUp({

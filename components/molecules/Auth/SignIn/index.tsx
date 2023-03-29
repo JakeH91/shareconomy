@@ -26,6 +26,8 @@ export default function SignIn({
   clickHandlers,
 }: SignInProps): React.ReactElement {
   const supabase = useSupabaseClient();
+
+  // TODO: redirect to home
   const onSubmit: SubmitHandler<SignInFormValues> = async (data) => {
     await supabase.auth.signInWithPassword({
       email: data.email,

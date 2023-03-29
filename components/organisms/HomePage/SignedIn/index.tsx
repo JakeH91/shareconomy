@@ -8,7 +8,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 
-type Posts = Database["public"]["Tables"]["posts"]["Row"];
+type PostsType = Database["public"]["Tables"]["posts"]["Row"];
 
 export default function HomePageSignedIn() {
   const user = useUser();
@@ -30,13 +30,12 @@ export default function HomePageSignedIn() {
       "postgres_changes",
       { event: "*", schema: "public", table: "posts" },
       (payload) => {
-        console.log("Change received!", payload);
         setPosts((current) => [...current, payload.new]);
       }
     )
     .subscribe();
   const [loading, setLoading] = useState(false);
-  const onSubmit: SubmitHandler<Posts> = async (data) => {
+  const onSubmit: SubmitHandler<PostsType> = async (data) => {
     try {
       setLoading(true);
       if (!user) throw new Error("No user");
@@ -61,8 +60,7 @@ export default function HomePageSignedIn() {
     }
   };
 
-  console.log("Posts:", posts);
-
+  // TODO: Clear form after submission
   return (
     <main className={"flex-column"}>
       <h2>Ask for help!</h2>

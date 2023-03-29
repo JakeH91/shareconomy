@@ -1,8 +1,9 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/types/supabase";
 import { NextApiRequest, NextApiResponse } from "next";
+import { randomUUID } from "crypto";
 
-export default async function getAllPosts(
+export default async function insertComment(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -10,12 +11,24 @@ export default async function getAllPosts(
     req,
     res,
   });
+  const {
+    data: { user },
+  } = await supabaseServerClient.auth.getUser();
+  const { body } = req;
   try {
     const { data, error, status } = await supabaseServerClient
-      .from("posts")
-      .select(
-        `id, created_at, updated_at, profile_id, title, content, comments ( id, created_at, updated_at, profile_id, content, reply_of )`
-      );
+      .from("comments")
+      .insert([
+        {
+          id: randomUUID(),
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          profile_id: user.id,
+          content: body.content,
+          parent_post: body.post_id,
+          reply_of: null,
+        },
+      ]);
 
     if (!error) {
       return res.status(status).json(data);
