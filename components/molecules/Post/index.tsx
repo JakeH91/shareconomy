@@ -17,7 +17,7 @@ type PostProps = {
 export default function Post({ post }: PostProps): React.ReactElement {
   const [loading, setLoading] = useState(false);
 
-  // TODO: Make this listener WORK!!!!!
+  // TODO: Update comments after payload. Filter comments table by post id, change event to insert
   const supabase = useSupabaseClient();
   supabase
     .channel("comment-insert-channel")
